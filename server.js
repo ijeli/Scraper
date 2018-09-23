@@ -1,16 +1,13 @@
 //dependencies
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-// var logger = require('morgan');
 
 //initialize Express app
 var express = require('express');
 var app = express();
 
-// app.use(logger('dev'));
-// app.use(bodyParser.urlencoded({
-//   extended: false
-// }));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 app.use(express.static(process.cwd() + '/public'));
 
@@ -31,10 +28,11 @@ db.once('open', function() {
   console.log('Connected to Mongoose!')
 });
 
-// var routes = require('./controller/controller.js');
-// app.use('/', routes);
+var controller = require('./controller/controller.js');
+app.use('/', controller);
 
-var port = process.env.PORT || 3000;
-app.listen(port, function(){
-  console.log('Listening on PORT ' + port);
+
+var PORT = process.env.PORT || 3000;
+app.listen(PORT, function(){
+  console.log('Listening on PORT ' + PORT);
 });
