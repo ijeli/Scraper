@@ -136,8 +136,8 @@ router.get('/readArticle/:id', function(req, res){
         request(link, function(error, response, html) {
           var $ = cheerio.load(html);
 
-          $('.l-col__main').each(function(i, element){
-            hbsObj.body = $(this).children('.c-entry-content').children('p').text();
+          $('.bb-card-item').each(function(i, element){
+            hbsObj.body = $(this).children('.entry-content').children('p').text();
             //send article body and comments to article.handlbars through hbObj
             res.render('article', hbsObj);
             //prevents loop through so it doesn't return an empty hbsObj.body
